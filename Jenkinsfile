@@ -33,7 +33,7 @@ pipeline {
         }
         stage('Good Bye') {
             steps {
-                echo 'Good Bye Genil'
+                echo 'Good Bye Genil Alejandro'
             }
         }
     }
