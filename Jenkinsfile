@@ -2,33 +2,13 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Sonar') {
             steps {
-                echo 'Hello World'
-            }
-        }
-        stage('Step 1') {
-            steps {
-                echo 'Step 1'
-                sh "uname"
-            }
-        }
-        stage('Step 2') {
-            steps {
-                echo 'Step 2'
-                sh "java --version"
-            }
-        }
-        stage('Step 3') {
-            steps {
-                echo 'Step 3'
-                sh "ps -aux"
-            }
-        }
-        stage('Step 4') {
-            steps {
-                echo 'Step 4'
-                sh "pwd"
+                withSonarQubeEnv('sonarqube') {
+                    sh "echo 'Calling sonar Service in another docker container!'"
+                    // Run Maven on a Unix agent to execute Sonar.
+                    sh './mvnw clean verify sonar:sonar'
+                }
             }
         }
         stage('Good Bye') {
